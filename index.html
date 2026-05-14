@@ -179,29 +179,29 @@
     border-radius:999px;align-self:flex-start;
   }
 
-  /* Tracks */
-  .tracks{margin-top:22px;display:flex;flex-direction:column;gap:18px;min-height:380px}
-  .track{position:relative;padding-left:18px;border-left:1px solid var(--line-soft)}
+  /* Tracks — bigger fonts for readability, larger min-height for cross-column alignment */
+  .tracks{margin-top:30px;display:flex;flex-direction:column;gap:24px;min-height:540px}
+  .track{position:relative;padding-left:20px;border-left:1px solid var(--line-soft)}
   .track .label{
-    font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:0.34em;
+    font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:0.34em;
     text-transform:uppercase;color:var(--ink-3);font-weight:500;
-    display:flex;align-items:center;gap:10px;margin-bottom:10px;
+    display:flex;align-items:center;gap:10px;margin-bottom:14px;
   }
   .track .label::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ink-4)}
-  .track ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
+  .track ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px}
   .track li{
-    font-size:14.5px;line-height:1.45;color:var(--ink-2);font-weight:300;
-    letter-spacing:-0.005em;padding-left:18px;position:relative;
+    font-size:17px;line-height:1.5;color:var(--ink-2);font-weight:300;
+    letter-spacing:-0.005em;padding-left:20px;position:relative;
   }
   .track li::before{
-    content:"";position:absolute;left:0;top:9px;width:6px;height:1px;background:var(--ink-4);
+    content:"";position:absolute;left:0;top:11px;width:8px;height:1px;background:var(--ink-4);
   }
 
-  .track.madup{border-left-color:rgba(255,255,255,0.4)}
+  .track.madup{border-left-color:rgba(255,255,255,0.5)}
   .track.madup .label{color:#fff}
   .track.madup .label::before{background:#fff;box-shadow:0 0 8px rgba(255,255,255,0.7)}
-  .track.madup li{color:#fff;font-weight:400;font-size:15.5px}
-  .track.madup li::before{background:#fff;width:10px}
+  .track.madup li{color:#fff;font-weight:400;font-size:18.5px}
+  .track.madup li::before{background:#fff;width:12px}
 
   .track.social .label{color:#9ec5ff}
   .track.social .label::before{background:#9ec5ff}
@@ -245,27 +245,20 @@
   }
   .keyvis-cap b{font-weight:500;color:#fff;font-style:normal}
 
-  /* Comment / pull quote — continuous horizontal band across all columns */
+  /* Comment — moved to top right under the year, prominent inline statement */
   .comment{
-    margin:28px -70px 0;
-    padding:22px 70px 24px;
-    background:linear-gradient(180deg, rgba(158,197,255,0.05), rgba(255,255,255,0.018));
+    margin:24px 0 0;
+    padding:0;
+    background:none;
     border:none;
-    border-top:1px solid rgba(255,255,255,0.18);
-    border-bottom:1px solid rgba(255,255,255,0.18);
     font-family:"Pretendard Variable",sans-serif;
-    font-size:20px;line-height:1.5;color:var(--ink);font-weight:300;
-    letter-spacing:-0.022em;
-    position:relative;
-    display:flex;align-items:center;
-    min-height:105px;
+    font-size:30px;line-height:1.45;color:#fff;font-weight:400;
+    letter-spacing:-0.024em;
+    display:flex;align-items:flex-start;
+    min-height:130px;
+    max-width:none;
   }
-  .comment::before{
-    content:"INSIGHT";position:absolute;top:-9px;left:70px;
-    font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--ink-3);
-    background:var(--bg);padding:0 12px;letter-spacing:0.4em;font-weight:500;
-  }
-  .comment b{font-weight:600;color:#fff;letter-spacing:-0.025em}
+  .comment b{font-weight:700;color:#fff;letter-spacing:-0.028em}
 
   /* Hires — continuous horizontal band.  사람이 주인공. */
   .hires{
@@ -284,53 +277,50 @@
     pointer-events:none;
   }
   .hires .h-eyebrow{
-    font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:0.4em;
-    text-transform:uppercase;color:var(--ink-3);font-weight:500;margin-bottom:10px;
+    font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:0.4em;
+    text-transform:uppercase;color:var(--ink-3);font-weight:500;margin-bottom:14px;
   }
   .hires .h-caption{
-    font-family:"Pretendard Variable",sans-serif;font-weight:500;font-size:19px;
-    color:#fff;line-height:1.3;letter-spacing:-0.015em;margin-bottom:4px;
+    font-family:"Pretendard Variable",sans-serif;font-weight:500;font-size:24px;
+    color:#fff;line-height:1.3;letter-spacing:-0.015em;margin-bottom:6px;
   }
   .hires .h-caption b{font-weight:700}
   .hires .h-sub{
-    font-family:Inter;font-size:11px;letter-spacing:0.04em;color:var(--ink-3);
-    font-weight:300;margin-bottom:18px;
+    font-family:Inter;font-size:13px;letter-spacing:0.04em;color:var(--ink-3);
+    font-weight:300;margin-bottom:22px;
   }
   .hires .h-count-wrap{
-    display:flex;align-items:baseline;gap:12px;padding-bottom:14px;
-    border-bottom:1px solid var(--line-soft);margin-bottom:18px;
+    display:flex;align-items:baseline;gap:14px;padding-bottom:18px;
+    border-bottom:1px solid var(--line-soft);margin-bottom:22px;
   }
   .hires .h-count{
-    font-family:Inter;font-weight:200;font-size:60px;color:#fff;letter-spacing:-0.05em;
+    font-family:Inter;font-weight:200;font-size:76px;color:#fff;letter-spacing:-0.05em;
     line-height:1;
   }
   .hires .h-count strong{font-weight:700}
   .hires .h-count-unit{
-    font-family:"Pretendard Variable",sans-serif;font-weight:400;font-size:22px;
+    font-family:"Pretendard Variable",sans-serif;font-weight:400;font-size:24px;
     color:var(--ink-2);letter-spacing:-0.01em;
   }
   .hires .h-count-unit em{font-style:normal;color:var(--ink-3);font-family:"JetBrains Mono",monospace;
-    font-size:11px;letter-spacing:0.3em;margin-left:10px;text-transform:uppercase}
+    font-size:12px;letter-spacing:0.3em;margin-left:10px;text-transform:uppercase}
+
+  /* Names — unified 8-column display for any year with multiple people */
   .hires .names{
-    column-count:2;column-gap:24px;column-rule:1px solid var(--line-soft);
-    line-height:1.5;
+    column-count:8;column-gap:14px;
+    column-rule:1px solid var(--line-soft);
+    line-height:1.55;
   }
   .hires .names .n{
-    display:block;font-size:15px;color:#fff;font-weight:400;
+    display:block;font-size:16px;color:#fff;font-weight:400;
     letter-spacing:-0.01em;break-inside:avoid;
-    padding:1px 0;
+    padding:2px 0;
   }
-  .hires .names .none{color:var(--ink-4);font-style:italic;font-size:14px;font-weight:300}
+  .hires .names .none{color:var(--ink-4);font-style:italic;font-size:16px;font-weight:300}
 
-  /* When many people — wider column count keeps the names from going too far down. */
-  .hires.many .names{column-count:6;column-gap:16px}
-  .hires.many .names .n{font-size:13.5px;line-height:1.45}
-  .hires.lots .names{column-count:8;column-gap:14px}
-  .hires.lots .names .n{font-size:12.5px;line-height:1.4}
-
-  /* When few (<=5): bigger, centered */
+  /* When few (<=5): 1 col, big & centered */
   .hires.few .names{column-count:1}
-  .hires.few .names .n{font-size:19px;font-weight:500;line-height:1.4;letter-spacing:-0.015em}
+  .hires.few .names .n{font-size:24px;font-weight:500;line-height:1.45;letter-spacing:-0.015em}
 
   /* END PANEL */
   .end{
@@ -761,12 +751,12 @@ const cols = DATA.years.map((d,i)=>{
         <span class="tag">${d.tag}</span>
       </div>
     </div>
+    <div class="comment">${d.comment}</div>
     <div class="keyvis">
       <div class="keyvis-frame">${KEY_VIS[d.year]||""}</div>
       <div class="keyvis-cap">${KEY_CAP[d.year]||""}</div>
     </div>
     ${tracks(d)}
-    <div class="comment">${d.comment}</div>
     <div class="hires ${cls}">
       <div class="h-eyebrow">MAD-RUNNERS · ${d.year}</div>
       <div class="h-caption">이 순간을 함께 <b>시작한 사람들</b></div>
