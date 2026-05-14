@@ -245,18 +245,19 @@
   }
   .keyvis-cap b{font-weight:500;color:#fff;font-style:normal}
 
-  /* Comment — moved to top right under the year, prominent inline statement */
+  /* Comment — continuous horizontal band between tracks and hires (big font, no INSIGHT label) */
   .comment{
-    margin:24px 0 0;
-    padding:0;
-    background:none;
+    margin:36px -70px 0;
+    padding:34px 70px 36px;
+    background:linear-gradient(180deg, rgba(158,197,255,0.05), rgba(255,255,255,0.018));
     border:none;
+    border-top:1px solid rgba(255,255,255,0.18);
+    border-bottom:1px solid rgba(255,255,255,0.18);
     font-family:"Pretendard Variable",sans-serif;
-    font-size:30px;line-height:1.45;color:#fff;font-weight:400;
+    font-size:28px;line-height:1.42;color:#fff;font-weight:400;
     letter-spacing:-0.024em;
-    display:flex;align-items:flex-start;
-    min-height:130px;
-    max-width:none;
+    display:flex;align-items:center;
+    min-height:150px;
   }
   .comment b{font-weight:700;color:#fff;letter-spacing:-0.028em}
 
@@ -751,12 +752,12 @@ const cols = DATA.years.map((d,i)=>{
         <span class="tag">${d.tag}</span>
       </div>
     </div>
-    <div class="comment">${d.comment}</div>
     <div class="keyvis">
       <div class="keyvis-frame">${KEY_VIS[d.year]||""}</div>
       <div class="keyvis-cap">${KEY_CAP[d.year]||""}</div>
     </div>
     ${tracks(d)}
+    <div class="comment">${d.comment}</div>
     <div class="hires ${cls}">
       <div class="h-eyebrow">MAD-RUNNERS · ${d.year}</div>
       <div class="h-caption">이 순간을 함께 <b>시작한 사람들</b></div>
