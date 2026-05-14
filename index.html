@@ -146,7 +146,7 @@
   /* === COLUMN === */
   .col{
     width:var(--col-w);min-width:var(--col-w);flex-shrink:0;
-    padding:90px 70px 70px;
+    padding:60px 70px 50px;
     position:relative;
     border-right:none;
     display:flex;flex-direction:column;
@@ -155,15 +155,15 @@
   .col:last-of-type{border-right:none}
 
   /* Year header */
-  .yearmark{position:relative;display:flex;align-items:flex-start;gap:28px;margin-bottom:36px}
+  .yearmark{position:relative;display:flex;align-items:flex-start;gap:24px;margin-bottom:22px}
   .yearmark .dot{
-    position:absolute;top:130px;left:-2px;width:14px;height:14px;border-radius:50%;
+    position:absolute;top:100px;left:-2px;width:14px;height:14px;border-radius:50%;
     background:#fff;
     box-shadow:0 0 0 4px var(--bg), 0 0 20px rgba(255,255,255,0.6);
     z-index:3;
   }
   .yearmark .num{
-    font-family:Inter;font-weight:200;font-size:148px;line-height:0.88;
+    font-family:Inter;font-weight:200;font-size:118px;line-height:0.85;
     letter-spacing:-0.06em;color:var(--ink);
   }
   .yearmark .num strong{font-weight:600}
@@ -180,27 +180,27 @@
   }
 
   /* Tracks */
-  .tracks{margin-top:30px;display:flex;flex-direction:column;gap:28px;min-height:540px}
-  .track{position:relative;padding-left:20px;border-left:1px solid var(--line-soft)}
+  .tracks{margin-top:22px;display:flex;flex-direction:column;gap:18px;min-height:380px}
+  .track{position:relative;padding-left:18px;border-left:1px solid var(--line-soft)}
   .track .label{
     font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:0.34em;
     text-transform:uppercase;color:var(--ink-3);font-weight:500;
-    display:flex;align-items:center;gap:10px;margin-bottom:14px;
+    display:flex;align-items:center;gap:10px;margin-bottom:10px;
   }
   .track .label::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ink-4)}
-  .track ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px}
+  .track ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
   .track li{
-    font-size:16px;line-height:1.55;color:var(--ink-2);font-weight:300;
+    font-size:14.5px;line-height:1.45;color:var(--ink-2);font-weight:300;
     letter-spacing:-0.005em;padding-left:18px;position:relative;
   }
   .track li::before{
-    content:"";position:absolute;left:0;top:10px;width:6px;height:1px;background:var(--ink-4);
+    content:"";position:absolute;left:0;top:9px;width:6px;height:1px;background:var(--ink-4);
   }
 
   .track.madup{border-left-color:rgba(255,255,255,0.4)}
   .track.madup .label{color:#fff}
   .track.madup .label::before{background:#fff;box-shadow:0 0 8px rgba(255,255,255,0.7)}
-  .track.madup li{color:#fff;font-weight:400;font-size:17px}
+  .track.madup li{color:#fff;font-weight:400;font-size:15.5px}
   .track.madup li::before{background:#fff;width:10px}
 
   .track.social .label{color:#9ec5ff}
@@ -212,16 +212,16 @@
 
   /* === KEY VISUAL === */
   .keyvis{
-    margin-top:30px;display:flex;flex-direction:column;gap:14px;
+    margin-top:20px;display:flex;flex-direction:column;gap:10px;
     position:relative;
   }
   .keyvis-frame{
-    width:100%;height:110px;
+    width:100%;height:80px;
     background:
       linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(158,197,255,0.04) 100%),
       radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.04), transparent 70%);
     border:1px solid var(--line-soft);
-    padding:14px 22px;
+    padding:10px 18px;
     display:flex;align-items:center;justify-content:center;
     position:relative;overflow:hidden;
   }
@@ -247,18 +247,18 @@
 
   /* Comment / pull quote — continuous horizontal band across all columns */
   .comment{
-    margin:48px -70px 0;          /* break out of column padding so border spans the full column */
-    padding:36px 70px 38px;
+    margin:28px -70px 0;
+    padding:22px 70px 24px;
     background:linear-gradient(180deg, rgba(158,197,255,0.05), rgba(255,255,255,0.018));
     border:none;
     border-top:1px solid rgba(255,255,255,0.18);
     border-bottom:1px solid rgba(255,255,255,0.18);
     font-family:"Pretendard Variable",sans-serif;
-    font-size:23px;line-height:1.5;color:var(--ink);font-weight:300;
+    font-size:20px;line-height:1.5;color:var(--ink);font-weight:300;
     letter-spacing:-0.022em;
     position:relative;
     display:flex;align-items:center;
-    min-height:150px;
+    min-height:105px;
   }
   .comment::before{
     content:"INSIGHT";position:absolute;top:-9px;left:70px;
@@ -269,8 +269,8 @@
 
   /* Hires — continuous horizontal band.  사람이 주인공. */
   .hires{
-    margin:48px -70px 0;          /* extend to column edges so the top line is continuous */
-    padding:44px 70px 70px;
+    margin:28px -70px 0;
+    padding:30px 70px 40px;
     background:linear-gradient(180deg, rgba(255,255,255,0.022), rgba(158,197,255,0.014));
     border:none;
     border-top:2px solid #fff;
@@ -285,23 +285,23 @@
   }
   .hires .h-eyebrow{
     font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:0.4em;
-    text-transform:uppercase;color:var(--ink-3);font-weight:500;margin-bottom:18px;
+    text-transform:uppercase;color:var(--ink-3);font-weight:500;margin-bottom:10px;
   }
   .hires .h-caption{
-    font-family:"Pretendard Variable",sans-serif;font-weight:500;font-size:22px;
-    color:#fff;line-height:1.35;letter-spacing:-0.015em;margin-bottom:6px;
+    font-family:"Pretendard Variable",sans-serif;font-weight:500;font-size:19px;
+    color:#fff;line-height:1.3;letter-spacing:-0.015em;margin-bottom:4px;
   }
   .hires .h-caption b{font-weight:700}
   .hires .h-sub{
-    font-family:Inter;font-size:12px;letter-spacing:0.04em;color:var(--ink-3);
-    font-weight:300;margin-bottom:28px;
+    font-family:Inter;font-size:11px;letter-spacing:0.04em;color:var(--ink-3);
+    font-weight:300;margin-bottom:18px;
   }
   .hires .h-count-wrap{
-    display:flex;align-items:baseline;gap:14px;padding-bottom:24px;
-    border-bottom:1px solid var(--line-soft);margin-bottom:28px;
+    display:flex;align-items:baseline;gap:12px;padding-bottom:14px;
+    border-bottom:1px solid var(--line-soft);margin-bottom:18px;
   }
   .hires .h-count{
-    font-family:Inter;font-weight:200;font-size:88px;color:#fff;letter-spacing:-0.05em;
+    font-family:Inter;font-weight:200;font-size:60px;color:#fff;letter-spacing:-0.05em;
     line-height:1;
   }
   .hires .h-count strong{font-weight:700}
@@ -312,25 +312,25 @@
   .hires .h-count-unit em{font-style:normal;color:var(--ink-3);font-family:"JetBrains Mono",monospace;
     font-size:11px;letter-spacing:0.3em;margin-left:10px;text-transform:uppercase}
   .hires .names{
-    column-count:2;column-gap:28px;column-rule:1px solid var(--line-soft);
-    line-height:1.7;
+    column-count:2;column-gap:24px;column-rule:1px solid var(--line-soft);
+    line-height:1.5;
   }
   .hires .names .n{
-    display:block;font-size:17px;color:#fff;font-weight:400;
+    display:block;font-size:15px;color:#fff;font-weight:400;
     letter-spacing:-0.01em;break-inside:avoid;
-    padding:2px 0;
+    padding:1px 0;
   }
-  .hires .names .none{color:var(--ink-4);font-style:italic;font-size:15px;font-weight:300}
+  .hires .names .none{color:var(--ink-4);font-style:italic;font-size:14px;font-weight:300}
 
   /* When many people — wider column count keeps the names from going too far down. */
-  .hires.many .names{column-count:4;column-gap:22px}
-  .hires.many .names .n{font-size:15.5px;line-height:1.75}
-  .hires.lots .names{column-count:6;column-gap:18px}
-  .hires.lots .names .n{font-size:14.5px;line-height:1.75}
+  .hires.many .names{column-count:6;column-gap:16px}
+  .hires.many .names .n{font-size:13.5px;line-height:1.45}
+  .hires.lots .names{column-count:8;column-gap:14px}
+  .hires.lots .names .n{font-size:12.5px;line-height:1.4}
 
   /* When few (<=5): bigger, centered */
   .hires.few .names{column-count:1}
-  .hires.few .names .n{font-size:22px;font-weight:500;line-height:1.5;letter-spacing:-0.015em}
+  .hires.few .names .n{font-size:19px;font-weight:500;line-height:1.4;letter-spacing:-0.015em}
 
   /* END PANEL */
   .end{
@@ -422,7 +422,7 @@
         여기까지 왔습니다.<br/><br/>
         2011년 지하 사무실의 작은 시작이<br/>
         <b>AI 광고 솔루션의 최전선</b>이 되기까지 —<br/>
-        한 걸음 한 걸음은 결국 사람의 이야기였습니다.<br/><br/>
+        한 걸음 한 걸음은 <b>결국 사람의 이야기였습니다.</b><br/><br/>
         이 벽은 매드업이 걸어온 <b>15년의 기록</b>이자<br/>
         함께 달려온 <b>1,353명 MAD-RUNNERS</b>의 발자취입니다.<br/><br/>
         이 여정 어딘가에서,<br/>
@@ -476,7 +476,7 @@
     <div class="end-inner">
       <div class="eyebrow">CHAPTER · NEXT</div>
       <h2>
-        Next<br/><strong>chapter<span class="period">.</span></strong>
+        Write<br/><strong>the future<span class="period">.</span></strong>
       </h2>
       <h3 class="ko-end">
         지금부터,<br/><strong>당신의 차례.</strong>
@@ -784,7 +784,7 @@ document.getElementById('cols').innerHTML = cols;
   const colW = 1500;
   const dotInCol = 75;
   const endPanelW = 1200;
-  const baseY = 227;
+  const baseY = 167;
   const dots = Array.from({length:cols}, (_,i)=>i*colW + dotInCol);
   const totalW = cols*colW + endPanelW;
 
