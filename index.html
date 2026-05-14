@@ -1,0 +1,794 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>MADUP · OUR JOURNEY — Run to the Next Chapter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+<style>
+  :root{
+    --bg:#0B0B0D;
+    --bg-2:#101015;
+    --bg-3:#16161c;
+    --line:#1E2A3A;
+    --line-soft:#23232b;
+    --ink:#FFFFFF;
+    --ink-2:#D9D9DE;
+    --ink-3:#8a8a92;
+    --ink-4:#54545c;
+    --accent:#FFFFFF;            /* main glow / line */
+    --madup:#FFFFFF;
+    --social:#9ec5ff;            /* cool blue for social */
+    --ai:#d9d9de;                /* near-white for AI */
+    --hire:#8d99ad;
+    --col-w:1500px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard Variable","Pretendard",Inter,-apple-system,system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  body{overflow:auto}
+
+  /* Cinematic ambient gradient */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(158,197,255,0.05), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(255,255,255,0.025), transparent 60%);
+  }
+
+  /* === INTRO PANEL === */
+  .intro{
+    position:sticky;left:0;top:0;flex-shrink:0;align-self:stretch;
+    width:880px;min-height:100vh;
+    padding:90px 80px;
+    background:linear-gradient(180deg, #0B0B0D 0%, #0d0d12 100%);
+    border-right:1px solid var(--line-soft);
+    display:flex;flex-direction:column;justify-content:space-between;gap:60px;
+    z-index:6;overflow:hidden;
+  }
+  .intro::before{
+    /* trajectory arc (orbit) */
+    content:"";position:absolute;
+    width:1400px;height:1400px;left:-380px;top:50%;transform:translateY(-50%);
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,0.06);
+    pointer-events:none;
+  }
+  .intro::after{
+    content:"";position:absolute;
+    width:1100px;height:1100px;left:-220px;top:50%;transform:translateY(-50%);
+    border-radius:50%;
+    border:1px solid rgba(158,197,255,0.05);
+    pointer-events:none;
+  }
+  .intro-top{position:relative;z-index:2}
+  .intro-bottom{position:relative;z-index:2}
+  .eyebrow{
+    font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:0.4em;
+    color:var(--ink-3);text-transform:uppercase;font-weight:500;
+    display:flex;align-items:center;gap:14px;
+  }
+  .eyebrow::before{content:"";width:24px;height:1px;background:var(--ink-3)}
+
+  .intro h1{
+    font-family:Inter;font-weight:200;font-size:108px;line-height:0.96;
+    margin:48px 0 0;letter-spacing:-0.045em;color:var(--ink);
+  }
+  .intro h1 strong{font-weight:700;letter-spacing:-0.05em}
+  .intro h1 .period{color:var(--ink-3)}
+  .intro h2{
+    font-family:"Pretendard Variable",sans-serif;font-weight:300;font-size:22px;
+    line-height:1.55;color:var(--ink-2);margin:36px 0 0;letter-spacing:-0.01em;
+    max-width:560px;
+  }
+  .intro h2 b{font-weight:600;color:#fff}
+
+  .stats{
+    display:flex;gap:48px;margin-top:56px;padding-top:36px;
+    border-top:1px solid var(--line-soft);
+  }
+  .stat .k{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:0.3em;color:var(--ink-3);text-transform:uppercase}
+  .stat .v{font-family:Inter;font-weight:200;font-size:56px;line-height:1;color:var(--ink);margin-top:10px;letter-spacing:-0.04em}
+  .stat .v strong{font-weight:600}
+  .stat .v sup{font-size:18px;color:var(--ink-3);font-weight:400;margin-left:4px;top:-22px;position:relative}
+
+  .legend{display:flex;flex-direction:column;gap:14px;margin-top:auto}
+  .legend .row{display:flex;align-items:center;gap:18px;font-size:13px;color:var(--ink-2);font-weight:300;letter-spacing:-0.005em}
+  .legend .row code{font-family:"JetBrains Mono",monospace;color:var(--ink-4);font-size:11px;letter-spacing:0.2em}
+  .legend i{width:28px;height:1px;flex-shrink:0}
+  .legend i.m{background:#fff;height:2px}
+  .legend i.s{background:#9ec5ff}
+  .legend i.a{background:#d9d9de;opacity:0.6}
+  .legend i.h{background:#8d99ad;border-top:1px dashed;background:none;height:0;border-color:#8d99ad}
+
+  .credit{
+    font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:0.35em;
+    color:var(--ink-4);text-transform:uppercase;
+    display:flex;justify-content:space-between;margin-top:40px;padding-top:24px;
+    border-top:1px solid var(--line-soft);
+  }
+
+  /* === WALL CONTAINER === */
+  .wall{display:flex;align-items:stretch;position:relative;z-index:1;padding-right:0;min-height:100vh}
+
+  /* The trajectory rail — single continuous curve through every year */
+  .rail-wrap{position:absolute;left:880px;right:0;top:0;bottom:0;z-index:1;pointer-events:none}
+  .rail-curve{
+    position:absolute;left:0;top:0;width:100%;height:540px;
+    pointer-events:none;
+  }
+  .rail-curve svg{display:block;overflow:visible;max-width:none}
+  .rcl{
+    stroke:#fff;stroke-opacity:0.78;fill:none;stroke-width:1.4;
+    vector-effect:non-scaling-stroke;stroke-linecap:round;
+  }
+  .rcg{
+    stroke:#9ec5ff;stroke-opacity:0.42;fill:none;stroke-width:22;
+    filter:blur(14px);vector-effect:non-scaling-stroke;
+  }
+  .rcd{
+    stroke:rgba(255,255,255,0.22);fill:none;stroke-width:1;
+    stroke-dasharray:3 6;vector-effect:non-scaling-stroke;
+  }
+
+  /* === COLUMN === */
+  .col{
+    width:var(--col-w);min-width:var(--col-w);flex-shrink:0;
+    padding:90px 70px 70px;
+    position:relative;
+    border-right:none;
+    display:flex;flex-direction:column;
+    z-index:2;
+  }
+  .col:last-of-type{border-right:none}
+
+  /* Year header */
+  .yearmark{position:relative;display:flex;align-items:flex-start;gap:28px;margin-bottom:36px}
+  .yearmark .dot{
+    position:absolute;top:130px;left:-2px;width:14px;height:14px;border-radius:50%;
+    background:#fff;
+    box-shadow:0 0 0 4px var(--bg), 0 0 20px rgba(255,255,255,0.6);
+    z-index:3;
+  }
+  .yearmark .num{
+    font-family:Inter;font-weight:200;font-size:148px;line-height:0.88;
+    letter-spacing:-0.06em;color:var(--ink);
+  }
+  .yearmark .num strong{font-weight:600}
+  .yearmark .tag-wrap{padding-top:18px;display:flex;flex-direction:column;gap:10px}
+  .yearmark .index{
+    font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:0.3em;
+    color:var(--ink-4);text-transform:uppercase;
+  }
+  .yearmark .tag{
+    font-family:Inter;font-size:13px;font-weight:600;letter-spacing:0.18em;
+    color:#fff;text-transform:uppercase;
+    padding:6px 12px;border:1px solid rgba(255,255,255,0.25);
+    border-radius:999px;align-self:flex-start;
+  }
+
+  /* Tracks */
+  .tracks{margin-top:30px;display:flex;flex-direction:column;gap:28px;min-height:540px}
+  .track{position:relative;padding-left:20px;border-left:1px solid var(--line-soft)}
+  .track .label{
+    font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:0.34em;
+    text-transform:uppercase;color:var(--ink-3);font-weight:500;
+    display:flex;align-items:center;gap:10px;margin-bottom:14px;
+  }
+  .track .label::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ink-4)}
+  .track ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px}
+  .track li{
+    font-size:16px;line-height:1.55;color:var(--ink-2);font-weight:300;
+    letter-spacing:-0.005em;padding-left:18px;position:relative;
+  }
+  .track li::before{
+    content:"";position:absolute;left:0;top:10px;width:6px;height:1px;background:var(--ink-4);
+  }
+
+  .track.madup{border-left-color:rgba(255,255,255,0.4)}
+  .track.madup .label{color:#fff}
+  .track.madup .label::before{background:#fff;box-shadow:0 0 8px rgba(255,255,255,0.7)}
+  .track.madup li{color:#fff;font-weight:400;font-size:17px}
+  .track.madup li::before{background:#fff;width:10px}
+
+  .track.social .label{color:#9ec5ff}
+  .track.social .label::before{background:#9ec5ff}
+  .track.social li{color:#bcc8db}
+
+  .track.ai .label{color:#d9d9de}
+  .track.ai .label::before{background:#d9d9de}
+
+  /* === KEY VISUAL === */
+  .keyvis{
+    margin-top:30px;display:flex;flex-direction:column;gap:14px;
+    position:relative;
+  }
+  .keyvis-frame{
+    width:100%;height:110px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(158,197,255,0.04) 100%),
+      radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.04), transparent 70%);
+    border:1px solid var(--line-soft);
+    padding:14px 22px;
+    display:flex;align-items:center;justify-content:center;
+    position:relative;overflow:hidden;
+  }
+  /* corner accent marks */
+  .keyvis-frame::before,
+  .keyvis-frame::after{
+    content:"";position:absolute;width:8px;height:8px;
+    border:1px solid rgba(255,255,255,0.4);
+  }
+  .keyvis-frame::before{top:6px;left:6px;border-right:none;border-bottom:none}
+  .keyvis-frame::after{bottom:6px;right:6px;border-left:none;border-top:none}
+  .keyvis-frame svg{width:100%;height:100%;display:block;color:#fff;overflow:visible}
+  .keyvis-cap{
+    font-family:Inter;font-style:italic;font-weight:300;font-size:14px;
+    color:var(--ink-2);letter-spacing:-0.005em;line-height:1.4;
+    display:flex;align-items:center;gap:10px;
+  }
+  .keyvis-cap::before{
+    content:"";display:inline-block;width:16px;height:1px;background:var(--ink-3);
+    flex-shrink:0;
+  }
+  .keyvis-cap b{font-weight:500;color:#fff;font-style:normal}
+
+  /* Comment / pull quote — continuous horizontal band across all columns */
+  .comment{
+    margin:48px -70px 0;          /* break out of column padding so border spans the full column */
+    padding:36px 70px 38px;
+    background:linear-gradient(180deg, rgba(158,197,255,0.05), rgba(255,255,255,0.018));
+    border:none;
+    border-top:1px solid rgba(255,255,255,0.18);
+    border-bottom:1px solid rgba(255,255,255,0.18);
+    font-family:"Pretendard Variable",sans-serif;
+    font-size:23px;line-height:1.5;color:var(--ink);font-weight:300;
+    letter-spacing:-0.022em;
+    position:relative;
+    display:flex;align-items:center;
+    min-height:150px;
+  }
+  .comment::before{
+    content:"INSIGHT";position:absolute;top:-9px;left:70px;
+    font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--ink-3);
+    background:var(--bg);padding:0 12px;letter-spacing:0.4em;font-weight:500;
+  }
+  .comment b{font-weight:600;color:#fff;letter-spacing:-0.025em}
+
+  /* Hires — continuous horizontal band.  사람이 주인공. */
+  .hires{
+    margin:48px -70px 0;          /* extend to column edges so the top line is continuous */
+    padding:44px 70px 70px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.022), rgba(158,197,255,0.014));
+    border:none;
+    border-top:2px solid #fff;
+    flex:1;display:flex;flex-direction:column;
+    position:relative;
+  }
+  /* glow ribbon just below the top line — also spans the full column */
+  .hires::before{
+    content:"";position:absolute;top:1px;left:0;right:0;height:14px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.18), transparent);
+    pointer-events:none;
+  }
+  .hires .h-eyebrow{
+    font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:0.4em;
+    text-transform:uppercase;color:var(--ink-3);font-weight:500;margin-bottom:18px;
+  }
+  .hires .h-caption{
+    font-family:"Pretendard Variable",sans-serif;font-weight:500;font-size:22px;
+    color:#fff;line-height:1.35;letter-spacing:-0.015em;margin-bottom:6px;
+  }
+  .hires .h-caption b{font-weight:700}
+  .hires .h-sub{
+    font-family:Inter;font-size:12px;letter-spacing:0.04em;color:var(--ink-3);
+    font-weight:300;margin-bottom:28px;
+  }
+  .hires .h-count-wrap{
+    display:flex;align-items:baseline;gap:14px;padding-bottom:24px;
+    border-bottom:1px solid var(--line-soft);margin-bottom:28px;
+  }
+  .hires .h-count{
+    font-family:Inter;font-weight:200;font-size:88px;color:#fff;letter-spacing:-0.05em;
+    line-height:1;
+  }
+  .hires .h-count strong{font-weight:700}
+  .hires .h-count-unit{
+    font-family:"Pretendard Variable",sans-serif;font-weight:400;font-size:22px;
+    color:var(--ink-2);letter-spacing:-0.01em;
+  }
+  .hires .h-count-unit em{font-style:normal;color:var(--ink-3);font-family:"JetBrains Mono",monospace;
+    font-size:11px;letter-spacing:0.3em;margin-left:10px;text-transform:uppercase}
+  .hires .names{
+    column-count:2;column-gap:28px;column-rule:1px solid var(--line-soft);
+    line-height:1.7;
+  }
+  .hires .names .n{
+    display:block;font-size:17px;color:#fff;font-weight:400;
+    letter-spacing:-0.01em;break-inside:avoid;
+    padding:2px 0;
+  }
+  .hires .names .none{color:var(--ink-4);font-style:italic;font-size:15px;font-weight:300}
+
+  /* When many people — wider column count keeps the names from going too far down. */
+  .hires.many .names{column-count:4;column-gap:22px}
+  .hires.many .names .n{font-size:15.5px;line-height:1.75}
+  .hires.lots .names{column-count:6;column-gap:18px}
+  .hires.lots .names .n{font-size:14.5px;line-height:1.75}
+
+  /* When few (<=5): bigger, centered */
+  .hires.few .names{column-count:1}
+  .hires.few .names .n{font-size:22px;font-weight:500;line-height:1.5;letter-spacing:-0.015em}
+
+  /* END PANEL */
+  .end{
+    width:1200px;min-width:1200px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(180deg, #0B0B0D, #000);
+    padding:100px;position:relative;overflow:hidden;
+  }
+  .end::before{
+    content:"";position:absolute;
+    width:1800px;height:1800px;left:-200px;top:50%;transform:translateY(-50%);
+    border-radius:50%;border:1px solid rgba(158,197,255,0.12);
+  }
+  .end::after{
+    content:"";position:absolute;
+    width:1400px;height:1400px;left:-50px;top:50%;transform:translateY(-50%);
+    border-radius:50%;border:1px solid rgba(255,255,255,0.06);
+  }
+  .end-inner{text-align:center;position:relative;z-index:2}
+  .end .eyebrow{justify-content:center}
+  .end .eyebrow::before{display:none}
+  .end h2{
+    font-family:Inter;font-weight:200;font-size:132px;line-height:0.9;
+    letter-spacing:-0.05em;color:#fff;margin:36px 0 0;
+  }
+  .end h2 strong{font-weight:700}
+  .end h2 .period{color:var(--ink-3)}
+  .end p{
+    font-family:"Pretendard Variable",sans-serif;font-weight:300;font-size:18px;
+    color:var(--ink-2);margin-top:32px;line-height:1.6;letter-spacing:-0.005em;
+  }
+  .end .stamp{
+    margin-top:64px;padding:14px 28px;
+    border:1px solid rgba(255,255,255,0.3);color:#fff;display:inline-block;
+    font-family:"JetBrains Mono",monospace;font-size:11px;
+    letter-spacing:0.4em;text-transform:uppercase;font-weight:500;
+  }
+
+  /* PRINT */
+  @media print{
+    @page{size:5600mm 700mm;margin:0}
+    html,body{overflow:visible;width:auto;height:auto;background:var(--bg)}
+    body::before{display:none}
+    .intro{position:relative;height:700mm;width:1100mm;break-inside:avoid}
+    .col{break-inside:avoid;width:380mm;min-width:380mm;padding:60mm 30mm}
+    .end{width:320mm;min-width:320mm;padding:60mm 30mm}
+    .yearmark .num{font-size:200pt}
+  }
+</style>
+</head>
+<body>
+
+<div class="wall">
+
+  <!-- INTRO -->
+  <aside class="intro">
+    <div class="intro-top">
+      <div class="eyebrow">MADUP · JOURNEY WALL · 2011—2026</div>
+      <h1>
+        Run to<br/>the next<br/><strong>chapter<span class="period">.</span></strong>
+      </h1>
+      <h2>
+        매드업은 그동안<br/>
+        어떻게 적응하며 <b>성장해 왔을까요?</b><br/><br/>
+        2011년 아주 조그만 지하 사무실에서<br/>
+        소수의 인원으로 시작했던 매드업.<br/><br/>
+        시장이 바뀌고, 기술이 바뀌고, 사회가 바뀌는 사이<br/>
+        매드업은 이 시대에 가장 주목받는<br/>
+        <b>AI 광고 솔루션 회사</b>가 되었습니다.<br/><br/>
+        이 벽은 시대의 흐름에 대한 우리의 응답이자<br/>
+        함께 달려온 <b>1,353명의 MAD-RUNNERS</b>의 발자취입니다.<br/><br/>
+        매드업이 성장해온 순간에 기록된,<br/>
+        <b>자랑스러운 당신의 이름을 찾아보세요.</b>
+      </h2>
+      <div class="stats">
+        <div class="stat">
+          <div class="k">YEARS</div>
+          <div class="v"><strong>15</strong></div>
+        </div>
+        <div class="stat">
+          <div class="k">MAD-RUNNERS</div>
+          <div class="v"><strong>1,353</strong></div>
+        </div>
+        <div class="stat">
+          <div class="k">VALUATION</div>
+          <div class="v"><strong>2,550</strong><sup>억</sup></div>
+        </div>
+      </div>
+    </div>
+    <div class="intro-bottom">
+      <div class="legend">
+        <div class="row"><i class="m"></i>MADUP <code>· 우리의 이야기</code></div>
+        <div class="row"><i class="s"></i>KOREA · SOCIETY · INDUSTRY <code>· 우리를 둘러싼 흐름</code></div>
+        <div class="row"><i class="a"></i>GLOBAL · AI <code>· 더 큰 무대의 변화</code></div>
+        <div class="row"><i class="h"></i>MAD-RUNNERS <code>· 그해 합류한 사람들</code></div>
+      </div>
+      <div class="credit">
+        <span>HISTORY WALL</span>
+        <span>RUN TO THE NEXT CHAPTER</span>
+        <span>IR · 2026</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- TRAJECTORY — continuous curve -->
+  <div class="rail-wrap">
+    <div class="rail-curve">
+      <svg id="railCurve" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="rcg"/>
+        <path class="rcl"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- COLUMNS -->
+  <div id="cols" style="display:contents"></div>
+
+  <!-- END -->
+  <aside class="end">
+    <div class="end-inner">
+      <div class="eyebrow">CHAPTER · NEXT</div>
+      <h2>
+        Next<br/><strong>chapter<span class="period">.</span></strong>
+      </h2>
+      <p>The run continues.<br/>우리는 계속 달립니다.</p>
+      <div class="stamp">MADUP · KOSDAQ · 2026</div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+const DATA = {"years": [{"year": "2011", "tag": "START", "madup": ["매드업 설립", "모바일 앱 플랫폼 '폰플' 서비스 시작"], "social": ["카카오톡 가입자 1,000만 돌파", "한국 스마트폰 사용자 2,000만 명", "한미 FTA 비준"], "ai": ["애플 Siri 출시 — 음성비서 시대 개막", "IBM Watson, Jeopardy! 우승"], "comment": "스마트폰이 일상이 되기 시작하면서, 매드업은 처음부터 <b>모바일</b>에 베팅하며 출발"}, {"year": "2015", "tag": "광고대행 본격화", "madup": ["광고대행 사업 본격화"], "social": ["메르스(MERS) 사태", "다음-카카오 합병 완료", "인스타그램 한국 광고 정식 출시"], "ai": ["구글 TensorFlow 오픈소스 공개", "모바일 광고가 PC 광고를 첫 추월"], "comment": "광고의 무게중심이 모바일로 옮겨가던 시기, 매드업은 앱 플랫폼에서 <b>광고대행</b>으로 축을 전환"}, {"year": "2016", "tag": "첫 투자", "madup": ["스톤브릿지 시리즈A 투자유치"], "social": ["알파고 vs 이세돌", "한국 광고시장 11조"], "ai": ["알파고 4:1 승 → AI 대중화 분기점", "틱톡(더우인) 출시"], "comment": "AI가 한국 사회에 처음 충격을 안기던 시점, 매드업은 <b>첫 외부 자본</b>으로 도약 발판을 마련"}, {"year": "2017", "tag": "사명 변경", "madup": ["매드업 네트워크 런칭", "폰플애드 → 매드잇 사명 변경"], "social": ["문재인 정부 출범", "네이버 검색광고 전면 개편", "비트코인 광풍"], "ai": ["구글 'Attention is All You Need' 논문 — 오늘날 LLM의 출발점", "유튜브 브랜드안전 보이콧 사태"], "comment": "광고 시장이 디지털로 빠르게 재편되는 흐름 속에서, 매드업은 사명을 바꾸며 <b>정체성을 재정의</b>"}, {"year": "2018", "tag": "시리즈B 134억", "madup": ["시리즈B 134억 투자유치"], "social": ["평창 동계올림픽", "남북정상회담", "한국 디지털 광고 4.4조"], "ai": ["GDPR 시행", "케임브리지 애널리티카 사태", "구글 BERT", "구글 Smart Bidding 도입"], "comment": "광고 데이터 규제가 글로벌 화두로 떠오르던 가운데, 매드업은 본격 스케일업을 위한 <b>실탄을 확보</b>"}, {"year": "2019", "tag": "LEVER 런칭", "madup": ["레버(LEVER) 런칭", "자회사 매드잇 합병"], "social": ["세계 최초 5G 상용화", "일본 수출규제·NO재팬", "한국 광고시장 13조 돌파"], "ai": ["OpenAI GPT-2 공개", "틱톡 글로벌 다운로드 1위", "Disney+ 출시"], "comment": "광고가 자동화·솔루션 시대로 진입하면서, 매드업은 대행사에서 <b>솔루션 회사</b>로 변신을 시작"}, {"year": "2020", "tag": "솔루션화 · 1,000억", "madup": ["레버프로 런칭", "프리시리즈C 투자유치", "기업가치 1,000억 인정", "삼성생명 서초타워 이전"], "social": ["COVID-19 팬데믹", "디지털 광고가 방송광고를 첫 추월", "배민·쿠팡이츠 폭발 성장"], "ai": ["GPT-3 발표", "애플 ATT(IDFA) 정책 예고"], "comment": "비대면이 표준으로 자리 잡는 흐름 속에서, 매드업은 자동화 솔루션으로 정면 돌파하며 <b>1,000억 가치</b>를 인정"}, {"year": "2021", "tag": "사업 확장", "madup": ["사업 확장", "기술평가 T-4 우수기업", "브랜드빌드업 사업 확장", "서울형 강소기업 선정", "메타 파트너 어워즈 이노베이션 히어로", "AppsFlyer 국내 최초 공식 파트너"], "social": ["한국 광고시장 16조", "디지털 비중 50% 첫 돌파", "위드코로나 시도"], "ai": ["애플 ATT 시행 → 모바일 광고 지각변동", "페이스북 → 메타 리브랜딩", "NFT·메타버스 광풍"], "comment": "ATT 충격으로 업계가 흔들리는 사이, 매드업은 <b>AppsFlyer 1호 파트너</b>로 데이터 신뢰 자산을 선점"}, {"year": "2022", "tag": "예비유니콘 · 2,550억", "madup": ["예비유니콘 기업 선정", "미래에셋 IPO 주관계약 체결", "기업가치 2,550억 인정", "메타 파트너 어워즈 퍼포먼스·솔루션 히어로 2관왕", "구글 프리미어 파트너 최고등급 선정"], "social": ["카카오 데이터센터 화재 — IT 인프라 리스크 부상", "러-우 전쟁", "한국 디지털 광고 9조"], "ai": ["ChatGPT 출시 (11/30) — 생성형 AI 시대 개막", "Midjourney·Stable Diffusion 공개"], "comment": "생성형 AI가 빅뱅하던 격동기, 매드업은 <b>IPO 트랙</b>을 본격 가동하며 다음 도약을 준비"}, {"year": "2023", "tag": "LEVER X-pert 개발", "madup": ["레버엑스퍼트(LEVER X-pert) 개발", "구글서치 아너즈 3위", "메타 파트너 어워즈 퍼포먼스·솔루션 히어로 2관왕", "크리테오 어워즈 퍼포머·프로젝트 오브 더 이어", "대한민국 디지털 광고대상 동상"], "social": ["GA4 의무 전환", "ChatGPT 한국 사용자 폭증", "한국 광고시장 16.5조"], "ai": ["GPT-4 · Claude 출시", "메타 Advantage+ · 구글 Performance Max 본격화 — AI가 광고를 직접 운영"], "comment": "AI가 광고를 직접 운영하기 시작한 원년, 매드업은 곧바로 <b>X-pert로 응답</b>하며 솔루션을 차세대로"}, {"year": "2024", "tag": "X-pert 세일즈", "madup": ["레버엑스퍼트 세일즈 본격화", "틱톡 에이전시 어워즈 UG Excellent·Inspirational Partner 2관왕", "크리테오 어워즈 퍼포머 오브 더 이어", "메타 에이전시 퍼스트 어워즈 크리에이티브 히어로"], "social": ["12·3 비상계엄 사태", "의료대란", "쿠키리스 본격화", "토스·당근의 광고 플랫폼화"], "ai": ["OpenAI Sora 공개", "Apple Intelligence 발표", "Claude 3.5 · GPT-4o", "광고 크리에이티브 AI 자동화 표준화"], "comment": "사회의 불확실성이 짙어지면서, 매드업은 <b>AI 광고 솔루션 영업력</b>을 본격 가동"}, {"year": "2025", "tag": "코스닥 예비심사", "madup": ["코스닥 상장 예비심사 청구", "메타 에이전시 퍼스트 어워즈 게임체인저 부문 2관왕", "크리테오 어워즈 클라이언트 그로스 파트너 오브 더 이어", "대한민국 디지털 광고대상 '대상'"], "social": ["비상계엄 후폭풍·조기대선", "한국 광고시장 17조 추정", "에이전시 AI 전환 본격화"], "ai": ["Agentic AI 시대 — AI 에이전트가 광고 운영·최적화 자동 수행", "Claude Opus 4 · GPT-5"], "comment": "AI가 광고주의 의사결정 파트너로 자리 잡는 가운데, 매드업은 <b>'대상' 수상과 IPO 트랙</b>으로 업계 최정상에 안착"}, {"year": "2026", "tag": "코스닥 상장", "madup": ["코스닥 상장", "유니콘 브릿지"], "social": ["(행사 직전 보강)"], "ai": ["(행사 직전 보강)"], "comment": "15년의 여정이 결실을 맺으며, 모바일 앱에서 AI 광고 솔루션, 그리고 <b>상장</b>으로"}], "hires": {"2011": ["이동호"], "2012": [], "2013": ["윤신구"], "2014": ["이주민", "윤다위", "방민지"], "2015": ["박승근", "기유진", "이홍주", "송기범", "김은영", "신범희", "고혜령", "서희령", "정경빈", "0박상훈", "전윤아", "0엄정식", "박지선", "김상현", "고승현", "구하나"], "2016": ["고아라", "우가영", "박유선", "김성훈", "안재성", "성정빈", "구세미", "이성우", "송우석", "김국진", "서민혁", "안재현", "이준호", "남미령", "전민영", "나기복", "심성철", "정재훈", "이승준", "이현철", "곽상은"], "2017": ["정승원", "전민규", "배준환", "이소영", "유미림", "전혜민", "권예지", "라현수", "0박지은", "황규빈", "윤석준", "최주영", "이재원", "이봉진", "김서현", "이창훈", "이아름", "유예본", "단혜", "정경중", "채명식"], "2018": ["신보경", "나수아", "오승학", "송호중", "우현석", "김민성", "김선유", "장세이", "이혜린", "장지은", "여지운", "조아라", "박예은", "지영은", "김경수", "권진희", "이재철", "0정혜인", "김건", "김정환", "정진태", "전보연", "정인영", "진문익", "박성우", "왕국욱"], "2019": ["권희연", "박재연", "김제웅", "박기량", "허수정", "유지선", "방제윤", "조민주", "이성욱", "김지수", "류수영", "양성민", "김나영", "박선종", "민정수", "이현서", "박정우", "오아람", "전유진", "나영인", "허진석", "0김성연", "0김진주", "송미리", "김준형", "김천웅", "이호열", "0김혜빈", "안현우", "유미진", "한동준", "0이다정", "이종관", "신주용", "정다은", "심아영", "신윤우", "조혜련", "이수지", "정현택", "박현승", "조대균", "홍성웅", "박고운", "김동욱", "안세영", "남우식", "박지예", "정주연", "장승현", "0김효진", "권오완", "이승연", "류동석", "이진호", "0이지현", "홍가연", "이종일", "0신동주", "박진슬"], "2020": ["정효진", "유재희", "이유경", "곽대희", "최수만", "김서영", "최윤희", "이현림", "고명성", "풍유진", "김민기", "박제연", "김유림", "김세연", "김유나", "황유정", "박중현", "김주현", "송지수", "이상미", "박정후", "송민구", "정지연", "이태훈", "김선영", "홍승범", "신은솔", "김혜미", "권아름", "이소영", "최고운", "권혜민", "방준석", "0한혜인", "오다희", "정재경", "박준희", "손정희", "이지은", "김남현", "임은정", "장재원", "송재근", "박근민", "조철남", "김민희", "김도영", "김기환", "강유진", "이용진", "최소망", "이채은", "정지향", "유희화", "서은정", "조언하", "최용석", "오미경", "송지연", "정선미", "정희균", "김지원", "권다솜", "김수연", "이세연", "조다현", "한빛누리", "장준수", "한상운", "최다원", "조현진", "심지원", "0박유진", "박주홍", "류기원", "유지현", "김정모", "김하윤", "임승환", "김소현", "최혜원", "김아림", "문희원", "문희소", "배서현", "0조현기", "전유림", "최지혜", "김주만", "박서현", "정아인", "박창하", "정유리", "안정은", "이윤", "조명선", "0이지혜", "0김수연", "0이화연", "0이동호", "김영경", "김미정", "박은혜", "0김영환", "채예은", "박신해", "장보윤", "박소연", "박세정", "이소정", "최보경", "구민희", "0김수현", "박주홍", "박다영", "신은주", "0이채은"], "2021": ["백재연", "강원진", "김영환", "박다라", "정문희", "김지원", "오승미", "이혜민", "나경수", "정지수", "남승철", "방성지", "최다희", "이경래", "민상준", "강문정", "이길래", "권민석", "박유리", "김상우", "손연화", "권주희", "유현재", "정지수", "김채안", "박신희", "손혜지", "육상호", "최향아", "현준호", "홍유니", "내호선", "황태헌", "박다운", "곽지은", "송선정", "권은지", "장수진", "양지연", "유송희", "이상원", "최경민", "이윤희", "이수현", "이혜린", "송은혜", "김성식", "장근호", "장현진", "김현서", "조영임", "박예샘", "박상훈", "김주연", "김지숙", "김현지", "한아름", "박주홍", "0김규봉", "송소진", "한동우", "김경한", "유아름", "0권이현", "김영훈", "장민수", "이루리", "하은지", "고정우", "정희은", "도영서", "김채연", "0김예진", "이주민", "김은정", "박현우", "안희정", "고윤정", "강나경", "김병림", "0나원준", "0이장호", "김은진", "양소영", "변예성", "황지원", "강다솜", "유민혜", "오서영", "0이지희", "이선재", "고지윤", "김소진", "안선영", "박광호", "반지연", "김세영", "김경빈", "주진주", "윤용현", "강윤영", "허진우", "이예지", "김희영", "정효원", "김가영", "김경영", "권가영", "조명현", "이정희", "정현준", "김경민", "이효두", "엄정식", "장희수", "0김성규", "박수지", "0황초연", "최지현", "이정훈", "이서영", "윤지성", "서진", "정여원", "김석호", "오관용", "김하은", "천승재", "박석진", "송효진", "이용민", "연광석", "오상훈", "채희진", "최용호", "문선정", "김윤도", "김정연", "정예륜", "최민지", "김유경", "이보영", "정서희", "김선우", "정용수", "황희진", "임현수", "박정은", "김수현", "김다인", "임유정", "강주성", "이필웅", "정구영", "서윤형", "김예진", "이지환", "박지나", "현승재", "석송주", "오소영", "최성규", "홍진영", "김성우", "0김윤서", "구본우", "0김수민", "0김재현", "차성환", "서해슬", "기찬민", "배민희", "이영훈", "김소연", "이예은", "허이서", "서해진", "장수영", "박기덕", "박상민", "정충환", "0김도현", "강아림", "이재연", "손준하", "문세희", "나수현", "안세웅", "김민욱", "김태우", "홍서연", "오택환", "김지원", "0정민지", "김규현", "이승노", "박준현", "김해리", "김은빈", "김세연", "황준혁", "임근영", "김유지", "정영우", "김주난", "신진아", "임수연", "윤영기", "우승준"], "2022": ["최준호", "문석민", "이영은", "김현찬", "안동환", "박정현", "김진호", "안효진", "권희정", "이수은", "임한민", "곽민심", "김성현", "윤효진", "주우경", "김지원", "이정규", "장수빈", "노은지", "최수빈", "임은성", "김선호", "이여진", "김현민", "손정은", "김혜인", "양현영", "정재경", "구보리", "박성민", "이상현", "하창혁", "이상언", "여유경", "김재호", "서유진", "정세린", "노병주", "임서현", "윤정은", "하주희", "이가을", "이연미", "김수정", "조희지", "조현정", "한진희", "손영우", "신혜빈", "정세현", "권오준", "김지원", "손승아", "송성후", "김예진", "성치수", "장유리", "박미라", "김나영", "이아연", "김성연", "심혜빈", "송나영", "강희림", "이효정", "변유진", "이성택", "0김지윤", "배유진", "박현", "김민경", "정희라", "김수산", "서아라", "박민규", "최유진", "이유경", "안주형", "정승혜", "이예담", "김준호", "백가람", "양세영", "김수민", "0정연주", "김상원", "이승민", "서승민", "백종록", "맹주형", "김효진", "박수민", "신지원", "박미애", "최승준", "길영환", "정윤이", "박소은", "이영학", "송수진", "황우성", "최은경", "우주현", "최이령", "조채민", "박건민", "최경욱", "양희성", "0윤동현", "권예정", "정지현", "조소진", "정연주", "류지흠", "심혜빈", "이유빈", "이도영", "이수민", "임건", "박선영", "우태열", "신지영", "김호근", "한은빈", "이재랑", "김윤미", "박수안", "조민수", "정소윤", "박규관", "양대원", "윤지원", "윤은진", "정해솔", "이보라", "이헌주", "이한슬", "이현진", "최지목", "허상범", "안효연", "허정혜", "민성하"], "2023": ["이다윤", "박세영", "한선정", "노양백", "정지혜", "여운혁", "강영주", "강지수", "김지안", "김지현", "이태경", "최혜령", "민태홍", "최지훈", "오유림", "노욱진", "이승주", "김성지", "이화정", "봉우리", "이예림", "김민정", "최대범", "박지혜", "김예진", "이유진", "최유진", "김병찬", "양승현", "오유림", "전희정", "한재희", "박경희", "윤성주", "최진우", "김민주", "정채원", "박수빈", "나유지", "주채원", "우보경", "조성우", "박혜영", "양승찬", "이현진", "송지영", "김도희", "김지원", "심수현", "최연주", "송서은", "전소현", "이재영", "임재연", "구재경", "이나경", "김다은", "김한승", "곽태근", "오지혜", "박시연", "한태영", "조성훈", "홍웅기", "민보현", "정슬기", "이나경", "0안루디아", "정현", "김진솔", "황수연", "엄정원", "박상원", "최수진", "김대희", "오주영", "최지원", "김예주", "장원진", "김보경", "황은비", "조용화", "이미현", "최은호", "김승연", "강유진", "박지영", "김다솔", "방유림", "김영진", "최이브", "오설영", "김유현", "황유리", "곽주현", "김민상", "조해나", "김예진", "김현수", "김지희", "금나라", "윤민구", "최차이", "정상운", "류성재", "최정환", "김윤혁", "전재윤", "0임연정", "박해빈", "유영주", "이정윤", "김소라", "조현경", "안지은", "전병수"], "2024": ["이주영", "서지원", "조윤경", "정세원", "하지현", "김유진", "고은지", "김수빈", "김지은", "김채원", "김현중", "남예린", "우소영", "임유리", "정지훈", "주시현", "이지현", "이채연", "김윤지", "민희수", "이다정", "이지수", "최원욱", "전재원", "고해일", "인유진", "신동진", "최민경", "박연지", "정혜선", "조현기", "김주현", "박나영", "이홍석", "정병욱", "김성혁", "서민주", "조재현", "김민주", "유채이", "채명규", "조민정", "김경희", "백경화", "강남석", "김지윤", "이선경", "한혜인", "양희준", "조보람", "정동휘", "고한빈", "김가연", "김규리", "김예지", "김유빈", "김재현", "김지민", "김하람", "김혜빈", "박지원", "손진일", "양현정", "윤지수", "장진주", "조하늘", "이나원", "이주영", "정혜인", "김영빈", "안종택", "성지우", "장서영", "윤솔비", "홍세린", "정다솔", "서다경", "정현민", "김예림", "김지윤", "이지희", "임예진", "조항선", "진수정", "도유정", "이경상", "이채빈", "노혁진", "이윤희", "이옥현", "서지은", "박은진", "이해주", "강호", "유은주", "강윤창", "김우중", "강다혜", "안이경", "강지철", "김초원", "장형석", "우수정", "윤지영", "김영호", "정지현", "이지원", "배윤주", "조성진", "박준범", "안성현", "김민지", "김서현", "송유림", "성수현", "우정효", "이승희", "복다희", "전보배", "박지은", "김민진", "최하영", "정연주", "이지혜", "0전효경", "최어진", "김선아", "강한솔", "나원준", "유성혁", "이민정", "전용훈", "박유니", "김주연", "이혜인", "김덕수", "김지은", "김현아", "안현빈", "한정인", "고선희", "문현정", "송수경", "문예지", "정예진", "정은우", "이정원", "정나희", "최지호", "유채림", "김상희", "이혜선", "김윤서", "최치영", "정다운", "고수정", "이혜리", "0이다영", "윤제영", "김규리", "박순민", "김지영", "김소연", "최란영", "최민경", "강승구", "문해원", "이정훈", "정보람", "안루디아", "양운석", "황세영", "유재윤", "이장호", "김민규", "고서아", "권이현", "양지은", "이현우", "임유빈", "이세인", "김예진", "박병언", "임연정", "김수린", "강지연", "고민지", "정우주", "박소정", "김태민", "정주민", "전도현", "방경록", "안지민", "조명지", "권도연", "최유정", "윤태현", "김창훈", "오혜린", "김민서", "강솔", "천서윤", "문희지", "양재빈", "이주원"], "2025": ["김효정", "이샤론", "이은정", "서지희", "김효진", "배웅열", "최유림", "허준", "황혜빈", "이다영", "최정원", "김재훈", "강현우", "이동민", "김별아", "김도현", "김동하", "김선필", "김영채", "노유진", "서명지", "서혜원", "유선우", "한세희", "변유진", "최지수", "탁효준", "이소연", "하지연", "이진실", "임승은", "백지윤", "윤희정", "박찬휘", "신동천", "조은교", "배상현", "김민호", "박소정", "윤소연", "리베라 알렉산드라", "신한솔", "이지민", "오유미", "배수정", "오준헌", "고우아", "김규봉", "서유진", "이유진", "김유정", "김은선", "이나경", "이지희", "정현석", "김서현", "김성연", "김현지", "서지현", "유다영", "하지민", "김가경", "송초현", "김하동", "김용진", "이예림", "변자영", "조세빈", "공주영", "김슬아", "박유빈", "한지오", "강지현", "전재원", "공이주", "김건우", "김진주", "박영준", "유소이", "이용수", "조상필", "고병권", "권예린", "김명주", "김범석", "민대홍", "이아현", "최태영", "김성불", "이사라", "이승세", "이현우", "김진표", "서채영", "윤지현", "김예영", "김성규", "김예일", "김태연", "이유라", "이은솔", "이종수", "기수현", "석준원", "조유빈", "강경수", "곽유진", "김소형", "민지환", "박유진", "서지희", "오윤진", "유다은", "윤서연", "이송미", "이화연", "장서윤", "정은지", "조민정", "최지은", "홍은하", "하민수", "김혜빈", "박소영", "이원경", "최서혜", "강승민", "조윤주", "변세진", "신지윤", "엄승욱", "이혜린", "임대윤", "손주현", "조은이", "서은수", "김승환", "송명호", "김이슬", "민서현", "황아인", "김규리", "김정민", "박관순", "유설아", "유혜연", "최지원", "서혜린", "황주원", "김경민", "김다인", "김민경", "김자윤", "최정윤", "안유니", "김리원", "김지호", "손은비", "윤서현", "김윤영", "전주원", "최가은", "김은규", "서하나", "이우진", "장대니", "김채영", "정성희", "고유나", "권규빈", "김채은", "정승원", "정진우", "조성은", "한동주", "임기현", "박민지", "신다윤", "김채은", "김상원", "이승주", "이나영", "염정민", "성수현", "이하진", "백나린", "유수정", "김주찬", "양소오", "임인혁", "최동기", "윤혜정", "송민서", "송지원", "김예지", "김유빈", "신유진", "김해인", "오송현", "박하은", "임종원", "김한나", "홍유선", "박수현", "정희헌", "조윤해", "구반석", "조진오", "홍가은", "원종혁", "박은주", "양해주", "이소헌", "한유빈", "김민준", "이상화", "박민선", "안혜진", "김연지", "정수연", "현은민", "이민경", "김현영", "신동주", "김진한", "신이레", "이다영", "박지윤", "우소정", "이수현", "고우라", "이주은", "정우진", "신은애", "강민주", "김지우", "김수민", "정의주", "고은비", "안승주", "박지우", "이원지", "주연지", "정가인", "김영비", "노성은", "박윤영", "신혜연", "조건우", "이다희", "정석중", "하수혜", "전목련", "김봄", "김태지", "나유림", "남규민", "박채연", "양지원", "이연수", "전영주", "정하연", "채유원", "최윤혁", "최은서", "박진웅", "김민준", "김서린", "0임대윤", "김예지", "정다빈", "신동주", "임다빈", "원서연", "이종희", "정다운", "손수민", "유형상", "이승민", "최예진", "강다연", "성주현"], "2026": ["여우진", "김시연", "신동열", "이오준", "윤도연", "김정민", "성연호", "이현아", "장현민", "전혜경", "강지윤", "배성환", "백지혜", "손예은", "안영춘", "이영은", "장혜진", "전지혜", "하서진", "배인영", "심동섭", "이유정", "정의성", "최수빈", "임지윤", "황지연", "강채연", "노수은", "김다래", "오유림", "유예린", "장근화", "허예지", "김예린", "오희수", "전효경", "윤예서", "이도이", "정하늘", "조윤서", "노병욱", "배나연", "이연지", "최서예", "강동현", "김선구", "김이연", "박병주", "박서영", "박소현", "백태현", "오세린", "오은비", "원미리", "유정민", "유지민", "유혜정", "이수진", "이윤진", "정다경", "정영현", "정진희", "허유진", "박연지", "김형미", "이강현", "장연재", "전지원", "김민성", "유주영", "이유림", "권이혁", "남경준", "하재희", "황지영", "황초연", "강나루", "서혜주", "임충혁", "전현규", "공경진", "김민규", "김지수", "심보경", "임혜리", "장유은", "최은우", "김승표", "김예진", "박성태", "변우섭", "이조은", "강지형", "김성헌", "김은비", "김채현", "이나경", "이상민", "이정하", "이해림", "정수원", "천소혜", "최종현", "박세아", "최서진", "김은서", "김정원", "김종현", "윤동현", "강해인", "강호성", "고은서", "김민지", "오경택", "이서연", "이하나", "임주은", "조은진", "조지훈", "채희주", "문소정", "홍지화", "강수빈", "정민지", "고창웅", "변진희", "권예진", "김윤경", "박민경", "이기천", "조은길"]}};
+
+const S = `stroke="currentColor" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"`;
+const KEY_VIS = {
+  "2011": `<svg viewBox="0 0 240 120"><g ${S}>
+    <line x1="0" y1="60" x2="240" y2="60" stroke-dasharray="2 6" opacity="0.15"/>
+    <circle cx="120" cy="60" r="40" stroke-dasharray="3 4" opacity="0.45"/>
+    <circle cx="120" cy="60" r="40" opacity="0.55"/>
+    <line x1="80" y1="60" x2="160" y2="60" opacity="0.45"/>
+    <line x1="120" y1="20" x2="120" y2="100" opacity="0.45"/>
+    <text x="120" y="65" text-anchor="middle" font-family="JetBrains Mono" font-size="13" fill="currentColor" stroke="none" letter-spacing="2">T-00:00</text>
+    <line x1="48" y1="36" x2="56" y2="36" opacity="0.5"/>
+    <line x1="184" y1="36" x2="192" y2="36" opacity="0.5"/>
+    <line x1="48" y1="84" x2="56" y2="84" opacity="0.5"/>
+    <line x1="184" y1="84" x2="192" y2="84" opacity="0.5"/>
+  </g></svg>`,
+  "2015": `<svg viewBox="0 0 240 120"><g ${S}>
+    <line x1="0" y1="60" x2="240" y2="60" stroke-dasharray="2 6" opacity="0.15"/>
+    <polygon points="105,15 120,2 135,15" fill="currentColor" stroke="none" opacity="0.9"/>
+    <rect x="105" y="15" width="30" height="60" rx="2" opacity="0.85"/>
+    <line x1="105" y1="35" x2="135" y2="35" stroke-width="0.6" opacity="0.55"/>
+    <circle cx="120" cy="50" r="3" stroke-width="0.6" opacity="0.55"/>
+    <polygon points="105,68 105,85 92,82" stroke-width="0.9" opacity="0.7"/>
+    <polygon points="135,68 135,85 148,82" stroke-width="0.9" opacity="0.7"/>
+    <line x1="113" y1="78" x2="108" y2="100" opacity="0.6"/>
+    <line x1="120" y1="78" x2="120" y2="115" stroke-width="1.4"/>
+    <line x1="127" y1="78" x2="132" y2="100" opacity="0.6"/>
+    <line x1="118" y1="90" x2="113" y2="108" opacity="0.4"/>
+    <line x1="122" y1="90" x2="127" y2="108" opacity="0.4"/>
+  </g></svg>`,
+  "2016": `<svg viewBox="0 0 240 120"><g ${S}>
+    <line x1="0" y1="60" x2="240" y2="60" stroke-dasharray="2 6" opacity="0.15"/>
+    <circle cx="40" cy="32" r="2" fill="currentColor" stroke="none" opacity="0.85"/>
+    <circle cx="78" cy="48" r="2.8" fill="currentColor" stroke="none"/>
+    <circle cx="120" cy="32" r="3.4" fill="currentColor" stroke="none"/>
+    <circle cx="162" cy="52" r="2.4" fill="currentColor" stroke="none" opacity="0.85"/>
+    <circle cx="200" cy="38" r="2.8" fill="currentColor" stroke="none"/>
+    <circle cx="58" cy="82" r="2.4" fill="currentColor" stroke="none" opacity="0.85"/>
+    <circle cx="100" cy="92" r="3" fill="currentColor" stroke="none"/>
+    <circle cx="142" cy="78" r="2.4" fill="currentColor" stroke="none"/>
+    <circle cx="182" cy="92" r="2.8" fill="currentColor" stroke="none" opacity="0.85"/>
+    <line x1="40" y1="32" x2="78" y2="48" stroke-width="0.7" opacity="0.55"/>
+    <line x1="78" y1="48" x2="120" y2="32" stroke-width="0.7" opacity="0.55"/>
+    <line x1="120" y1="32" x2="162" y2="52" stroke-width="0.7" opacity="0.55"/>
+    <line x1="162" y1="52" x2="200" y2="38" stroke-width="0.7" opacity="0.55"/>
+    <line x1="78" y1="48" x2="100" y2="92" stroke-width="0.7" opacity="0.55"/>
+    <line x1="120" y1="32" x2="142" y2="78" stroke-width="0.7" opacity="0.55"/>
+    <line x1="58" y1="82" x2="100" y2="92" stroke-width="0.7" opacity="0.55"/>
+    <line x1="142" y1="78" x2="182" y2="92" stroke-width="0.7" opacity="0.55"/>
+    <line x1="100" y1="92" x2="142" y2="78" stroke-width="0.7" opacity="0.55"/>
+  </g></svg>`,
+  "2017": `<svg viewBox="0 0 240 120"><g ${S}>
+    <line x1="0" y1="60" x2="240" y2="60" stroke-dasharray="2 6" opacity="0.15"/>
+    <polygon points="105,10 120,-2 135,10" fill="currentColor" stroke="none" opacity="0.9"/>
+    <rect x="105" y="10" width="30" height="40" rx="2" opacity="0.9"/>
+    <line x1="120" y1="22" x2="120" y2="26" stroke-width="0.8" opacity="0.55"/>
+    <line x1="100" y1="58" x2="140" y2="58" stroke-dasharray="2 3" opacity="0.4"/>
+    <rect x="105" y="66" width="30" height="38" rx="2" opacity="0.55"/>
+    <polygon points="105,98 105,108 95,104" opacity="0.5"/>
+    <polygon points="135,98 135,108 145,104" opacity="0.5"/>
+    <line x1="100" y1="56" x2="90" y2="64" stroke-dasharray="2 3" opacity="0.55"/>
+    <line x1="140" y1="56" x2="150" y2="64" stroke-dasharray="2 3" opacity="0.55"/>
+  </g></svg>`,
+  "2018": `<svg viewBox="0 0 240 120"><g ${S}>
+    <line x1="0" y1="60" x2="240" y2="60" stroke-dasharray="2 6" opacity="0.15"/>
+    <path d="M30 100 A 90 90 0 0 1 210 100" opacity="0.5"/>
+    <line x1="42" y1="90" x2="48" y2="86" opacity="0.55"/>
+    <line x1="64" y1="68" x2="68" y2="62" opacity="0.55"/>
+    <line x1="98" y1="53" x2="98" y2="46" opacity="0.55"/>
+    <line x1="142" y1="53" x2="142" y2="46" opacity="0.55"/>
+    <line x1="176" y1="68" x2="172" y2="62" opacity="0.55"/>
+    <line x1="198" y1="90" x2="192" y2="86" opacity="0.55"/>
+    <line x1="120" y1="100" x2="186" y2="44" stroke-width="1.6"/>
+    <circle cx="120" cy="100" r="4" fill="currentColor" stroke="none"/>
+    <circle cx="186" cy="44" r="3" fill="currentColor" stroke="none"/>
+    <text x="120" y="118" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="currentColor" stroke="none" opacity="0.55" letter-spacing="2.5">THRUST</text>
+  </g></svg>`,
+  "2019": `<svg viewBox="0 0 240 120"><g ${S}>
+    <line x1="0" y1="60" x2="240" y2="60" stroke-dasharray="2 6" opacity="0.15"/>
+    <rect x="58" y="32" width="124" height="58" rx="3" opacity="0.55"/>
+    <line x1="58" y1="48" x2="182" y2="48" stroke-width="0.5" opacity="0.35"/>
+    <path d="M 80 78 A 38 38 0 0 1 156 38" stroke-dasharray="2 3" opacity="0.5"/>
+    <line x1="120" y1="78" x2="156" y2="38" stroke-width="2.4"/>
+    <circle cx="120" cy="78" r="4.5" fill="currentColor" stroke="none"/>
+    <circle cx="156" cy="38" r="6" fill="currentColor" stroke="none"/>
+    <circle cx="156" cy="38" r="9" opacity="0.5"/>
+    <text x="74" y="84" font-family="JetBrains Mono" font-size="7" fill="currentColor" stroke="none" opacity="0.55" letter-spacing="1">OFF</text>
+    <text x="152" y="30" font-family="JetBrains Mono" font-size="7" fill="currentColor" stroke="none" opacity="0.85" letter-spacing="1">ON</text>
+    <text x="120" y="106" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="currentColor" stroke="none" opacity="0.6" letter-spacing="3">LEVER</text>
+  </g></svg>`,
+  "2020": `<svg viewBox="0 0 240 120"><g ${S}>
+    <line x1="0" y1="60" x2="240" y2="60" stroke-dasharray="2 6" opacity="0.15"/>
+    <line x1="20" y1="62" x2="220" y2="62" stroke-dasharray="4 4" opacity="0.55"/>
+    <text x="26" y="56" font-family="JetBrains Mono" font-size="7" fill="currentColor" stroke="none" opacity="0.55" letter-spacing="1.5">ATMOSPHERE</text>
+    <polygon points="113,16 120,4 127,16" fill="currentColor" stroke="none" opacity="0.95"/>
+    <rect x="113" y="16" width="14" height="46" rx="2" opacity="0.95"/>
+    <line x1="120" y1="32" x2="120" y2="36" stroke-width="0.8" opacity="0.6"/>
+    <path d="M82 70 Q120 80 158 70" opacity="0.6"/>
+    <path d="M92 80 Q120 88 148 80" opacity="0.42"/>
+    <line x1="116" y1="62" x2="113" y2="88" opacity="0.7"/>
+    <line x1="120" y1="62" x2="120" y2="100" stroke-width="1.4"/>
+    <line x1="124" y1="62" x2="127" y2="88" opacity="0.7"/>
+    <line x1="118" y1="78" x2="115" y2="96" opacity="0.45"/>
+    <line x1="122" y1="78" x2="125" y2="96" opacity="0.45"/>
+  </g></svg>`,
+  "2021": `<svg viewBox="0 0 240 120"><g ${S}>
+    <line x1="0" y1="60" x2="240" y2="60" stroke-dasharray="2 6" opacity="0.15"/>
+    <circle cx="120" cy="60" r="22" opacity="0.45"/>
+    <circle cx="120" cy="60" r="22" stroke-dasharray="3 4" opacity="0.55"/>
+    <ellipse cx="120" cy="60" rx="86" ry="34" stroke-width="1" opacity="0.7"/>
+    <path d="M30 90 Q70 70 120 60 Q165 52 200 56" stroke-dasharray="3 4" opacity="0.55"/>
+    <polygon points="196,52 204,56 196,60" fill="currentColor" stroke="none" opacity="0.8"/>
+    <circle cx="200" cy="56" r="3.5" fill="currentColor" stroke="none"/>
+    <line x1="200" y1="56" x2="208" y2="48" opacity="0.55"/>
+    <line x1="200" y1="56" x2="192" y2="64" opacity="0.55"/>
+    <circle cx="120" cy="60" r="2" fill="currentColor" stroke="none"/>
+  </g></svg>`,
+  "2022": `<svg viewBox="0 0 240 120"><g ${S}>
+    <line x1="0" y1="60" x2="240" y2="60" stroke-dasharray="2 6" opacity="0.15"/>
+    <circle cx="120" cy="60" r="4" fill="currentColor" stroke="none"/>
+    <circle cx="120" cy="60" r="12" opacity="0.85"/>
+    <circle cx="120" cy="60" r="24" opacity="0.55"/>
+    <circle cx="120" cy="60" r="38" opacity="0.32"/>
+    <circle cx="120" cy="60" r="54" opacity="0.16"/>
+    <line x1="40" y1="60" x2="55" y2="60" opacity="0.5"/>
+    <line x1="200" y1="60" x2="185" y2="60" opacity="0.5"/>
+    <line x1="120" y1="2" x2="120" y2="16" opacity="0.5"/>
+    <line x1="120" y1="118" x2="120" y2="104" opacity="0.5"/>
+    <line x1="64" y1="16" x2="74" y2="26" opacity="0.4"/>
+    <line x1="176" y1="16" x2="166" y2="26" opacity="0.4"/>
+    <line x1="64" y1="104" x2="74" y2="94" opacity="0.4"/>
+    <line x1="176" y1="104" x2="166" y2="94" opacity="0.4"/>
+  </g></svg>`,
+  "2023": `<svg viewBox="0 0 240 120"><g ${S}>
+    <line x1="0" y1="60" x2="240" y2="60" stroke-dasharray="2 6" opacity="0.15"/>
+    <rect x="100" y="45" width="40" height="30" rx="2" opacity="0.9"/>
+    <circle cx="120" cy="60" r="4" fill="currentColor" stroke="none"/>
+    <line x1="100" y1="50" x2="40" y2="50" stroke-width="1.4"/>
+    <line x1="100" y1="70" x2="40" y2="70" stroke-width="1.4"/>
+    <rect x="40" y="48" width="60" height="24" stroke-width="0.6" opacity="0.55"/>
+    <line x1="55" y1="48" x2="55" y2="72" stroke-width="0.4" opacity="0.45"/>
+    <line x1="70" y1="48" x2="70" y2="72" stroke-width="0.4" opacity="0.45"/>
+    <line x1="85" y1="48" x2="85" y2="72" stroke-width="0.4" opacity="0.45"/>
+    <line x1="140" y1="50" x2="200" y2="50" stroke-width="1.4"/>
+    <line x1="140" y1="70" x2="200" y2="70" stroke-width="1.4"/>
+    <rect x="140" y="48" width="60" height="24" stroke-width="0.6" opacity="0.55"/>
+    <line x1="155" y1="48" x2="155" y2="72" stroke-width="0.4" opacity="0.45"/>
+    <line x1="170" y1="48" x2="170" y2="72" stroke-width="0.4" opacity="0.45"/>
+    <line x1="185" y1="48" x2="185" y2="72" stroke-width="0.4" opacity="0.45"/>
+    <text x="120" y="92" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="currentColor" stroke="none" opacity="0.55" letter-spacing="3">X-PERT</text>
+  </g></svg>`,
+  "2024": `<svg viewBox="0 0 240 120"><g ${S}>
+    <line x1="0" y1="60" x2="240" y2="60" stroke-dasharray="2 6" opacity="0.15"/>
+    <rect x="50" y="32" width="140" height="64" rx="4" opacity="0.55"/>
+    <rect x="58" y="42" width="52" height="42" rx="2" opacity="0.5"/>
+    <line x1="63" y1="50" x2="102" y2="50" stroke-width="0.5" opacity="0.55"/>
+    <line x1="63" y1="57" x2="92" y2="57" stroke-width="0.5" opacity="0.55"/>
+    <line x1="63" y1="64" x2="98" y2="64" stroke-width="0.5" opacity="0.55"/>
+    <line x1="63" y1="71" x2="85" y2="71" stroke-width="0.5" opacity="0.55"/>
+    <line x1="63" y1="78" x2="100" y2="78" stroke-width="0.5" opacity="0.55"/>
+    <circle cx="128" cy="54" r="4" fill="currentColor" stroke="none" opacity="0.55"/>
+    <circle cx="144" cy="54" r="4" opacity="0.6"/>
+    <circle cx="160" cy="54" r="4" fill="currentColor" stroke="none" opacity="0.85"/>
+    <circle cx="176" cy="54" r="4" opacity="0.55"/>
+    <circle cx="152" cy="80" r="9" opacity="0.7"/>
+    <line x1="152" y1="80" x2="170" y2="68" stroke-width="2.2"/>
+    <circle cx="170" cy="68" r="3.5" fill="currentColor" stroke="none"/>
+    <text x="50" y="108" font-family="JetBrains Mono" font-size="8" fill="currentColor" stroke="none" opacity="0.55" letter-spacing="2">NAV CONSOLE</text>
+  </g></svg>`,
+  "2025": `<svg viewBox="0 0 240 120"><g ${S}>
+    <line x1="0" y1="60" x2="240" y2="60" stroke-dasharray="2 6" opacity="0.15"/>
+    <ellipse cx="120" cy="60" rx="64" ry="28" opacity="0.45" stroke-dasharray="2 3"/>
+    <ellipse cx="120" cy="60" rx="38" ry="48" opacity="0.45" stroke-dasharray="2 3"/>
+    <circle cx="120" cy="60" r="9" opacity="0.9"/>
+    <circle cx="120" cy="60" r="3" fill="currentColor" stroke="none"/>
+    <circle cx="58" cy="44" r="3.2" fill="currentColor" stroke="none"/>
+    <circle cx="58" cy="76" r="3.2" fill="currentColor" stroke="none"/>
+    <circle cx="120" cy="14" r="3.2" fill="currentColor" stroke="none"/>
+    <circle cx="120" cy="106" r="3.2" fill="currentColor" stroke="none"/>
+    <circle cx="182" cy="44" r="3.2" fill="currentColor" stroke="none"/>
+    <circle cx="182" cy="76" r="3.2" fill="currentColor" stroke="none"/>
+    <line x1="120" y1="60" x2="58" y2="44" stroke-width="0.6" opacity="0.65"/>
+    <line x1="120" y1="60" x2="58" y2="76" stroke-width="0.6" opacity="0.65"/>
+    <line x1="120" y1="60" x2="120" y2="14" stroke-width="0.6" opacity="0.65"/>
+    <line x1="120" y1="60" x2="120" y2="106" stroke-width="0.6" opacity="0.65"/>
+    <line x1="120" y1="60" x2="182" y2="44" stroke-width="0.6" opacity="0.65"/>
+    <line x1="120" y1="60" x2="182" y2="76" stroke-width="0.6" opacity="0.65"/>
+  </g></svg>`,
+  "2026": `<svg viewBox="0 0 240 120"><g ${S}>
+    <line x1="0" y1="60" x2="240" y2="60" stroke-dasharray="2 6" opacity="0.15"/>
+    <path d="M0 96 Q120 70 240 96" opacity="0.55"/>
+    <path d="M0 96 Q120 70 240 96 L240 120 L0 120 Z" fill="rgba(255,255,255,0.04)" stroke="none"/>
+    <line x1="120" y1="82" x2="120" y2="18" stroke-width="1.4"/>
+    <polygon points="120,18 162,28 120,38" fill="currentColor" stroke="currentColor"/>
+    <circle cx="120" cy="82" r="3.5" fill="currentColor" stroke="none"/>
+    <line x1="108" y1="82" x2="132" y2="82" stroke-width="0.6" opacity="0.55"/>
+    <circle cx="38" cy="26" r="1.4" fill="currentColor" stroke="none" opacity="0.75"/>
+    <circle cx="68" cy="46" r="1.2" fill="currentColor" stroke="none" opacity="0.65"/>
+    <circle cx="192" cy="22" r="1.5" fill="currentColor" stroke="none" opacity="0.8"/>
+    <circle cx="210" cy="52" r="1.2" fill="currentColor" stroke="none" opacity="0.65"/>
+    <circle cx="52" cy="64" r="1" fill="currentColor" stroke="none" opacity="0.55"/>
+    <circle cx="178" cy="62" r="1" fill="currentColor" stroke="none" opacity="0.55"/>
+    <circle cx="98" cy="32" r="1" fill="currentColor" stroke="none" opacity="0.55"/>
+    <circle cx="148" cy="38" r="1" fill="currentColor" stroke="none" opacity="0.55"/>
+  </g></svg>`
+};
+const KEY_CAP = {
+  "2011": `<b>T-minus zero.</b>`,
+  "2015": `<b>First-stage ignition.</b>`,
+  "2016": `<b>Charting the stars.</b>`,
+  "2017": `<b>Stage separation.</b>`,
+  "2018": `<b>Burn to escape velocity.</b>`,
+  "2019": `<b>Engaging the lever.</b>`,
+  "2020": `<b>Breaking the atmosphere.</b>`,
+  "2021": `<b>Entering orbit.</b>`,
+  "2022": `<b>Cosmic dawn.</b>`,
+  "2023": `<b>Module deployed.</b>`,
+  "2024": `<b>Navigating the void.</b>`,
+  "2025": `<b>Constellation online.</b>`,
+  "2026": `<b>Touchdown.</b>`
+};
+
+const tracks = (d) => `
+  <div class="tracks">
+    <div class="track madup">
+      <span class="label">MADUP</span>
+      <ul>${d.madup.map(x=>`<li>${x}</li>`).join("")}</ul>
+    </div>
+    <div class="track social">
+      <span class="label">KOREA · SOCIETY · INDUSTRY</span>
+      <ul>${d.social.map(x=>`<li>${x}</li>`).join("")}</ul>
+    </div>
+    <div class="track ai">
+      <span class="label">GLOBAL · AI</span>
+      <ul>${d.ai.map(x=>`<li>${x}</li>`).join("")}</ul>
+    </div>
+  </div>
+`;
+
+const densityClass = (n) => {
+  if (n === 0) return "few";
+  if (n <= 5) return "few";
+  if (n <= 30) return "";
+  if (n <= 120) return "many";
+  return "lots";
+};
+
+const cols = DATA.years.map((d,i)=>{
+  const hires = (DATA.hires[d.year]||[]);
+  const cls = densityClass(hires.length);
+  const hireBlock = hires.length
+    ? `<div class="names">${hires.map(n=>`<span class="n">${n}</span>`).join("")}</div>`
+    : `<div class="names"><span class="none">아직 이야기의 시작 전</span></div>`;
+  const idx = String(i+1).padStart(2,'0');
+  return `
+  <section class="col">
+    <div class="yearmark">
+      <span class="dot"></span>
+      <span class="num">${d.year.slice(0,2)}<strong>${d.year.slice(2)}</strong></span>
+      <div class="tag-wrap">
+        <span class="index">CH. ${idx}</span>
+        <span class="tag">${d.tag}</span>
+      </div>
+    </div>
+    <div class="keyvis">
+      <div class="keyvis-frame">${KEY_VIS[d.year]||""}</div>
+      <div class="keyvis-cap">${KEY_CAP[d.year]||""}</div>
+    </div>
+    ${tracks(d)}
+    <div class="comment">${d.comment}</div>
+    <div class="hires ${cls}">
+      <div class="h-eyebrow">MAD-RUNNERS · ${d.year}</div>
+      <div class="h-caption">이 순간을 함께 <b>시작한 사람들</b></div>
+      <div class="h-sub">The people who started this chapter</div>
+      <div class="h-count-wrap">
+        <span class="h-count"><strong>${hires.length}</strong></span>
+        <span class="h-count-unit">명<em>NEW MAD-RUNNERS</em></span>
+      </div>
+      ${hireBlock}
+    </div>
+  </section>`;
+}).join("");
+
+document.getElementById('cols').innerHTML = cols;
+
+// === Build a continuous, freely-flowing curve through every year dot ===
+(function drawCurve(){
+  const cols = DATA.years.length;
+  const colW = 1500;
+  const dotInCol = 75;
+  const endPanelW = 1200;
+  const baseY = 227;
+  const dots = Array.from({length:cols}, (_,i)=>i*colW + dotInCol);
+  const totalW = cols*colW + endPanelW;
+
+  // Free-flow amplitudes per segment (12 segments between 13 dots).
+  // Irregular peaks/troughs — not a sine wave — to feel organic.
+  // All segments kept in the ±50~70 range so the wave stays prominent across the entire wall.
+  const ampsMain = [-62, +56, -58, +66, -54, +70, -60, +52, -68, +58, -56, +64];
+  const ampsSub  = [+34, -22, +28, -42, +24, -52, +36, -18, +44, -28, +38, -22];
+
+  // Cubic Bezier per segment: both control points at +/- amp from baseline.
+  // Slight asymmetry in horizontal position to make the swing feel less mechanical.
+  function makePath(baseY, amps, opts={}){
+    const a1 = opts.a1 ?? 0.30;
+    const a2 = opts.a2 ?? 0.70;
+    let d = `M ${dots[0]-300} ${baseY} L ${dots[0]} ${baseY}`;
+    for(let i=1;i<dots.length;i++){
+      const a = dots[i-1], b = dots[i];
+      const seg = b-a;
+      const amp = amps[i-1] ?? 0;
+      // Tiny horizontal jitter so swings don't look symmetric.
+      const jitter = ((i*37)%17 - 8) * 4;   // -32..+32 deterministic
+      const cp1x = a + seg*a1 + jitter;
+      const cp2x = a + seg*a2 - jitter;
+      d += ` C ${cp1x} ${baseY+amp}, ${cp2x} ${baseY+amp}, ${b} ${baseY}`;
+    }
+    // After the last year dot, two clear swings through the end panel so the wave doesn't trail off.
+    const last = dots[dots.length-1];
+    const tail = totalW - last;
+    const mid = last + tail*0.5;
+    d += ` C ${last + tail*0.25} ${baseY-58}, ${last + tail*0.45} ${baseY-58}, ${mid} ${baseY}`;
+    d += ` C ${mid + tail*0.2} ${baseY+50}, ${mid + tail*0.35} ${baseY+50}, ${totalW - 40} ${baseY}`;
+    return d;
+  }
+
+  const dMain = makePath(baseY, ampsMain);
+
+  const svg = document.getElementById('railCurve');
+  svg.setAttribute('viewBox', `0 0 ${totalW} 540`);
+  svg.setAttribute('width', totalW);
+  svg.setAttribute('height', 540);
+  svg.querySelector('.rcg').setAttribute('d', dMain);
+  svg.querySelector('.rcl').setAttribute('d', dMain);
+})();
+</script>
+</body>
+</html>
