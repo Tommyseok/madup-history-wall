@@ -73,21 +73,24 @@
   }
   .eyebrow::before{content:"";width:24px;height:1px;background:var(--ink-3)}
 
-  .intro .subtitle{
-    font-family:Inter;font-weight:300;font-size:20px;letter-spacing:-0.005em;
-    color:var(--ink-3);margin-top:26px;
-  }
-  .intro .subtitle strong{color:#fff;font-weight:500}
-
   .intro h1{
-    font-family:"Pretendard Variable",sans-serif;
-    font-weight:300;font-size:74px;line-height:1.16;
-    margin:32px 0 0;letter-spacing:-0.035em;color:var(--ink);
+    font-family:Inter;font-weight:200;font-size:108px;line-height:0.96;
+    margin:48px 0 0;letter-spacing:-0.045em;color:var(--ink);
   }
-  .intro h1 strong{font-weight:800;letter-spacing:-0.04em;color:#fff}
+  .intro h1 strong{font-weight:700;letter-spacing:-0.05em}
+  .intro h1 .period{color:var(--ink-3)}
+
+  .intro .ko-headline{
+    font-family:"Pretendard Variable",sans-serif;
+    font-weight:300;font-size:36px;line-height:1.38;
+    margin:40px 0 0;letter-spacing:-0.022em;color:var(--ink-2);
+    max-width:680px;
+  }
+  .intro .ko-headline strong{font-weight:700;color:#fff;letter-spacing:-0.025em}
+
   .intro h2{
     font-family:"Pretendard Variable",sans-serif;font-weight:300;font-size:19px;
-    line-height:1.75;color:var(--ink-2);margin:48px 0 0;letter-spacing:-0.005em;
+    line-height:1.75;color:var(--ink-2);margin:44px 0 0;letter-spacing:-0.005em;
     max-width:680px;
   }
   .intro h2 b{font-weight:600;color:#fff}
@@ -331,37 +334,56 @@
 
   /* END PANEL */
   .end{
-    width:1400px;min-width:1400px;flex-shrink:0;
+    width:1200px;min-width:1200px;flex-shrink:0;
     display:flex;align-items:center;justify-content:center;
     background:linear-gradient(180deg, #0B0B0D, #000);
-    padding:100px 80px;position:relative;overflow:hidden;
+    padding:100px;position:relative;overflow:hidden;
   }
   .end::before{
     content:"";position:absolute;
-    width:2000px;height:2000px;left:-200px;top:50%;transform:translateY(-50%);
+    width:1800px;height:1800px;left:-200px;top:50%;transform:translateY(-50%);
     border-radius:50%;border:1px solid rgba(158,197,255,0.12);
   }
   .end::after{
     content:"";position:absolute;
-    width:1500px;height:1500px;left:-50px;top:50%;transform:translateY(-50%);
+    width:1400px;height:1400px;left:-50px;top:50%;transform:translateY(-50%);
     border-radius:50%;border:1px solid rgba(255,255,255,0.06);
   }
   .end-inner{text-align:center;position:relative;z-index:2}
   .end .eyebrow{justify-content:center}
   .end .eyebrow::before{display:none}
+
+  /* Original English headline — restored */
   .end h2{
+    font-family:Inter;font-weight:200;font-size:132px;line-height:0.9;
+    letter-spacing:-0.05em;color:#fff;margin:36px 0 0;
+  }
+  .end h2 strong{font-weight:700}
+  .end h2 .period{color:var(--ink-3)}
+
+  /* Added Korean headline — very large */
+  .end .ko-end{
     font-family:"Pretendard Variable",sans-serif;
-    font-weight:300;font-size:156px;line-height:1.02;
-    letter-spacing:-0.05em;color:#fff;margin:40px 0 0;
+    font-weight:300;font-size:112px;line-height:1.04;
+    letter-spacing:-0.045em;color:#fff;margin:56px 0 0;
   }
-  .end h2 strong{font-weight:800;letter-spacing:-0.06em}
-  .end p{
-    font-family:"Pretendard Variable",sans-serif;font-weight:300;font-size:24px;
-    color:var(--ink-2);margin-top:56px;line-height:1.7;letter-spacing:-0.01em;
+  .end .ko-end strong{font-weight:800;letter-spacing:-0.055em}
+
+  /* Added Korean sub copy */
+  .end .ko-end-sub{
+    font-family:"Pretendard Variable",sans-serif;font-weight:300;font-size:22px;
+    color:var(--ink-2);margin-top:40px;line-height:1.65;letter-spacing:-0.01em;
   }
-  .end p b{font-weight:600;color:#fff}
+  .end .ko-end-sub b{font-weight:600;color:#fff}
+
+  /* Original tag line — preserved, slightly demoted */
+  .end .en-tag{
+    font-family:Inter;font-weight:300;font-size:14px;letter-spacing:0.15em;
+    color:var(--ink-3);margin-top:40px;line-height:1.7;text-transform:uppercase;
+  }
+
   .end .stamp{
-    margin-top:64px;padding:14px 28px;
+    margin-top:48px;padding:14px 28px;
     border:1px solid rgba(255,255,255,0.3);color:#fff;display:inline-block;
     font-family:"JetBrains Mono",monospace;font-size:11px;
     letter-spacing:0.4em;text-transform:uppercase;font-weight:500;
@@ -387,13 +409,14 @@
   <aside class="intro">
     <div class="intro-top">
       <div class="eyebrow">MADUP · JOURNEY WALL · 2011—2026</div>
-      <div class="subtitle">Run to the next <strong>chapter.</strong></div>
       <h1>
-        이 여정<br/>어딘가에 새겨진<br/>
-        <strong>당신의 이름이</strong><br/>
-        지금의 매드업을<br/>
-        <strong>만들었습니다.</strong>
+        Run to<br/>the next<br/><strong>chapter<span class="period">.</span></strong>
       </h1>
+      <h3 class="ko-headline">
+        이 여정 어딘가에 새겨진<br/>
+        <strong>당신의 이름</strong>이<br/>
+        지금의 매드업을 만들었습니다.
+      </h3>
       <h2>
         매드업은 시대의 부름에 답하며<br/>
         여기까지 왔습니다.<br/><br/>
@@ -453,9 +476,16 @@
     <div class="end-inner">
       <div class="eyebrow">CHAPTER · NEXT</div>
       <h2>
-        지금부터,<br/><strong>당신의 차례.</strong>
+        Next<br/><strong>chapter<span class="period">.</span></strong>
       </h2>
-      <p>매드업은 더 큰 무대로 나아갑니다.<br/>그 다음 챕터를, <b>함께 써 주세요.</b></p>
+      <h3 class="ko-end">
+        지금부터,<br/><strong>당신의 차례.</strong>
+      </h3>
+      <p class="ko-end-sub">
+        매드업은 더 큰 무대로 나아갑니다.<br/>
+        그 다음 챕터를, <b>함께 써 주세요.</b>
+      </p>
+      <p class="en-tag">The run continues.<br/>우리는 계속 달립니다.</p>
       <div class="stamp">MADUP · KOSDAQ · 2026</div>
     </div>
   </aside>
@@ -753,7 +783,7 @@ document.getElementById('cols').innerHTML = cols;
   const cols = DATA.years.length;
   const colW = 1500;
   const dotInCol = 75;
-  const endPanelW = 1400;
+  const endPanelW = 1200;
   const baseY = 227;
   const dots = Array.from({length:cols}, (_,i)=>i*colW + dotInCol);
   const totalW = cols*colW + endPanelW;
